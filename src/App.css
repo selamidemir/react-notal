@@ -1,38 +1,129 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.header-container {
+  background-color: #4357ad;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.header {
+  padding: 9px;
+  width: 100%;
+  max-width: 992px;
   display: flex;
-  flex-direction: column;
+  justify-content:space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.header h2 {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.header span a {
+  color: white;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.content {
+  margin-top: 15px;
+  width: 100%;
+  max-width: 992px;
+  display: grid;
+  gap: 15px;
+  grid-template-columns: auto auto auto;
+}
+
+.content-height {
+  min-height: 60vh;
+}
+
+.card {
+  width: 100%;
+  height: 255px;
+  background-color: cadetblue;
+  box-shadow: 1px 1px 3px 1px;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  background-color: darkgray;
+  text-align: right;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.card-body {
+  background-color: beige;
+  padding: 5px;
+  height: 185px;
+}
+
+.card-footer {
+  background-color: gray;
+  padding: 3px;
+  padding-top: 5px;
+  padding-bottom: 1px;
+  text-align: right;
+}
+
+.color-picker {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 7px;
+  border-radius: 50px;
+  border: 1px white solid;
+  cursor: pointer;
+}
+
+.color-picker:hover {
+  border-color:#4357ad;
+}
+
+.color-1 {
+  background-color: #e4dfda;
+}
+
+.color-2 {
+  background-color: #97D8B2;
+}
+
+.color-3 {
+  background-color: #DCEDFF;
+}
+
+.color-4 {
+  background-color: #fff275;
+}
+
+.color-5 {
+  background-color: #858AE3;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+}
+
+.footer {
+  margin-top: 15px;
+  padding: 15px;
+  text-align: center;
+  border-top: 1px gray solid;
+}
+
+@media screen and (max-width: 768px) {
+  .content {
+    grid-template-columns: auto auto;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media screen and (max-width: 576px) {
+  .content {
+    grid-template-columns: auto;
   }
 }
