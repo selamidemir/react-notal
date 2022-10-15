@@ -5,9 +5,9 @@ function Content() {
   return (
     <div className="flex-container content-height">
       <div className="content">
-        <Card />
-        <Card />
-        <Card />
+        <Card note={{}} />
+        <Card note={{}} />
+        <Card note={{}} />
       </div>
     </div>
   );

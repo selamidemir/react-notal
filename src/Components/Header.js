@@ -1,20 +1,28 @@
 import React from "react";
 import { JournalCheck, PlusSquare } from "react-bootstrap-icons";
+import { useNotes } from "../contexts/NoteContext";
+import AddForm from "./AddForm";
 
 function Header() {
+  const { isFormVisible, setIsFormVisible } = useNotes();
+
   return (
-    <div className="flex-container header-container">
-      <div className="header">
-        <h2>
-          <JournalCheck /> NotAl
-        </h2>
-        <span>
-          <a href="/#" title="Not Ekle">
+    <>
+      <div className="flex-container header-container">
+        <div className="header">
+          <h2>
+            <JournalCheck /> NotAl
+          </h2>
+          <button
+            className="icon-button add-note-button"
+            onClick={() => setIsFormVisible(true)}
+          >
             <PlusSquare />
-          </a>
-        </span>
+          </button>
+        </div>
       </div>
-    </div>
+      {isFormVisible && <AddForm />}
+    </>
   );
 }
 
