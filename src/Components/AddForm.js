@@ -1,3 +1,4 @@
+import { nanoid } from "nanoid";
 import React, { useState } from "react";
 import { XSquare } from "react-bootstrap-icons";
 import { useNotes } from "../contexts/NoteContext";
@@ -15,6 +16,7 @@ function AddForm() {
   const handleAddNote = (e, close) => {
     e.preventDefault();
     const note = {
+      id: nanoid(),
       color: bodyColor,
       description: description,
     };
