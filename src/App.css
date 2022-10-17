@@ -44,6 +44,7 @@ body {
 .card {
   margin: 0;
   width: 100%;
+  max-width: 375px;
   height: 249px;
   box-shadow: 1px 1px 3px 1px;
 }
@@ -60,7 +61,6 @@ body {
 }
 
 .card-body-container {
-  width: 275px !important;
   padding: 5px;
   height: 176px;
 }
@@ -157,7 +157,7 @@ body {
   padding-left: 9px;
 }
 
-.add-form-description {
+.card-body-container .add-form-description {
   margin: auto auto;
   width: 97%;
   height: 93%;
