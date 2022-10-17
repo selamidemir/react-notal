@@ -1,15 +1,23 @@
-import React, { useContext } from "react";
-import { NoteContext } from "../contexts/NoteContext";
+import React, { useState, useEffect } from "react";
+import { useNotes } from "../contexts/NoteContext";
 import Card from "./Card";
 
-function Content({refresh, notes1}) { 
-  const {notes} = useContext(NoteContext);
+function Content() {
+  const { notes, refresh } = useNotes();
+  const [refreshPage, setRefreshPage] = useState(false);
+  useEffect(() => {
+    // Not silindiğinde notların yanlış
+    // Yenilenmesi nedeni ile 
+    // Notları yenilemeye zorluyoruz.
+    setRefreshPage(true);
+    setTimeout(()=> setRefreshPage(false), 1);
+  }, [refresh, setRefreshPage]);
+
   return (
     <div className="flex-container content-height">
-      <div className="content" data-refresh={refresh}>
-        {notes.map((note, index) => (
-          <Card note={note} key={index} />
-        ))}
+      <div className="content">
+        {!refreshPage &&
+          notes.map((note, index) => <Card note={note} key={index} />)}
       </div>
     </div>
   );

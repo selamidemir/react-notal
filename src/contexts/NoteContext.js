@@ -13,27 +13,27 @@ export const NoteProvider = ({ children }) => {
   const [refresh, setRefresh] = useState(0);
   const [isFormVisible, setIsFormVisible] = useState(false);
 
-  const addNote = (note) => {
-    if (!note.hasOwnProperty("id")) return;
-    saveNotes([...notes, note]);
-  };
-
-  const saveNotes = (newNotes) => {
+  const saveNotes = (newNotes, refresh) => {
     setNotes(newNotes);
     localStorage.setItem("notes", JSON.stringify(newNotes));
-    setTimeout(setRefresh(Math.random()), 3500)
+    refresh && setRefresh(Math.random());
   };
 
+  const addNote = (note) => {
+    if (!note.hasOwnProperty("id")) return;
+    saveNotes([...notes, note], true);
+  };
+  
   const deleteNote = (noteId) => {
     if(!noteId) return;
     const newNotes = notes.filter(note => note.id !== noteId);
-    saveNotes(newNotes);
+    saveNotes(newNotes, true);
   };
 
   const updateNote = (note) => {
     if (!note.hasOwnProperty("id")) return;
     const newNotes = notes.map((item) => (item.id === note.id ? note : item));
-    saveNotes(newNotes);
+    saveNotes(newNotes, true);
   };
 
   const updateNoteColor = (noteId, color) => {
@@ -42,7 +42,7 @@ export const NoteProvider = ({ children }) => {
       if(item.id === noteId) item.color = color;
       return item;
     });
-    saveNotes(newNotes);
+    saveNotes(newNotes, false);
   };
 
   const values = {

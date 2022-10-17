@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import { PencilSquare, Save, Trash } from "react-bootstrap-icons";
 import { useNotes } from "../contexts/NoteContext";
+import convert from "react-from-dom";
+import { marked } from "marked";
 
 function Card({ note }) {
   const [description, setDescription] = useState(note.description);
   const [bodyColor, setBodyColor] = useState(note.color);
   const [editMode, setEditMode] = useState(false);
   const { deleteNote, updateNote, updateNoteColor } = useNotes();
+  const htmlString = "<div>" + marked.parse(description) + "</div>";
+  const htmlDescription = convert(htmlString);
 
   const handleEdit = (e) => {
     e.preventDefault();
@@ -36,8 +40,8 @@ function Card({ note }) {
 
   const handleColorChange = (color) => {
     setBodyColor(color);
-    updateNoteColor(note.id, color)
-  }
+    updateNoteColor(note.id, color);
+  };
 
   return (
     <div className={`card ${bodyColor}`}>
@@ -45,36 +49,42 @@ function Card({ note }) {
         <div>{note.date}</div>
         <div>
           {!editMode && (
-            <button
-              className="icon-button"
-              onClick={(e) => handleEdit(e)}
-            >
+            <button className="icon-button" onClick={(e) => handleEdit(e)}>
               <PencilSquare />
             </button>
           )}
           {editMode && (
-            <button
-              className="icon-button"
-              onClick={(e) => handleSave(e)}
-            >
+            <button className="icon-button" onClick={(e) => handleSave(e)}>
               <Save />
             </button>
           )}
           <button
-            className="icon-button" title={note.id}
-            onClick={(e) => handleDelete(e)}
+            className="icon-button"
+            title={note.id}
+            onClick={(e) => {
+              if (window.confirm("Bu notu silmek istediğinizden emin misiniz?"))
+                handleDelete(e);
+            }}
           >
             <Trash />
           </button>
         </div>
       </div>
       <div className={`card-body-container ${bodyColor}`}>
-        <textarea
-          disabled={!editMode}
-          className={`edit-form-description  ${bodyColor}`}
-          value={description}
-          onChange={(e) => handleChange(e)}
-        ></textarea>
+        {editMode && (
+          <textarea
+            disabled={!editMode}
+            className={`edit-form-description  ${bodyColor}`}
+            value={description}
+            onChange={(e) => handleChange(e)}
+          ></textarea>
+        )}
+        {!editMode && (
+          <div
+            disabled={!editMode}
+            className={`edit-form-description  ${bodyColor}`}
+          >{htmlDescription}</div>
+        )}
       </div>
       <div className="card-footer">
         <div
