@@ -73,14 +73,14 @@ function Card({ note }) {
       <div className={`card-body-container ${bodyColor}`}>
         {editMode && (
           <textarea
-            className={`edit-form-description  ${bodyColor}`}
+            className={`card-body  ${bodyColor}`}
             value={description}
             onChange={(e) => handleChange(e)}
           ></textarea>
         )}
         {!editMode && (
           <div
-            className={`edit-form-description  ${bodyColor}`}
+            className={`card-body  ${bodyColor}`}
           >{htmlDescription}</div>
         )}
       </div>
