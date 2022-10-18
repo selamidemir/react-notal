@@ -1,13 +1,15 @@
 import { createContext, useContext, useState } from "react";
+import { initialNotes } from "./initialNotes";
 
 export const NoteContext = createContext();
 
+
 export const NoteProvider = ({ children }) => {
-  let savedNotes = JSON.parse(localStorage.getItem("notes")) || [];
-  if (savedNotes.length === 0) {
-    savedNotes = [];
-    localStorage.setItem("notes", JSON.stringify(savedNotes));
-  }
+  let savedNotes = JSON.parse(localStorage.getItem("notes")) || initialNotes;
+  // if (savedNotes.length === 0) {
+  //   savedNotes = [];
+  //   localStorage.setItem("notes", JSON.stringify(savedNotes));
+  // }
 
   const [notes, setNotes] = useState(savedNotes);
   const [refresh, setRefresh] = useState(0);
